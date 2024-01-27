@@ -2,3 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .input-auth {
+    @apply px-2 py-3 w-[clamp(200px,100%,750px)] border-dark border-2 rounded-md
+  }
+}
