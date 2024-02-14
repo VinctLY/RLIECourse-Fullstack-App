@@ -1,31 +1,17 @@
 import { useState, useRef } from "react";
-import { createPortal } from "react-dom";
 import { Link, useNavigate } from "react-router-dom";
 import validator from "validator";
-
-import { signUp } from "../utils/firebaseAuth";
-
 import useInput from "../hooks/useInput";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
-
 import AuthInput from "../components/AuthInput";
 import ShowPassword from "../components/ShowPassword";
+import { Password } from "./Register";
 
-interface Password {
-	length: number;
-	score: number;
-	alphaNumeric: boolean;
-}
-
-const Register = () => {
+export const Register = () => {
 	const [email, setEmail] = useInput("");
 	const [password, setPassword] = useInput("");
 	const [confirmationPassword, setConfirmationPassword] = useInput("");
-
-	const [createUsernameModal, setCreateUsernameModal] = useState(false);
-	const [username, setUsername] = useInput("");
 
 	const [showPassword, setShowPassword] = useState(false);
 	const [showConfirmationPassword, setShowConfirmationPassword] = useState<boolean>(false);
@@ -106,11 +92,7 @@ const Register = () => {
 			return (buttonSubmitRef.current.disabled = true);
 
 		try {
-			const userCred = await signUp(email, password);
-			
-			console.log(userCred)
-
-			setCreateUsernameModal(true)
+			// await signUp(email, password);
 			// navigate("/login");
 		} catch (error: any) {
 			setError(true);
@@ -174,7 +156,6 @@ const Register = () => {
 						disabled={!isFormSubmittable()}
 						ref={buttonSubmitRef}>
 						Sign Up
-						{createUsernameModal && createPortal(<div>Hello world</div>, document.body)}
 					</button>
 					{error && (
 						<p className="text-red-600">Failed to create an account, please try again later!</p>
@@ -184,5 +165,3 @@ const Register = () => {
 		</div>
 	);
 };
-
-export default Register;

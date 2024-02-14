@@ -3,7 +3,17 @@
 @tailwind utilities;
 
 @layer components {
-  .input-auth {
-    @apply px-2 py-3 w-[clamp(200px,100%,750px)] border-dark border-2 rounded-md
-  }
+	.input-auth {
+		@apply px-2 py-3 w-[clamp(200px,100%,750px)] border-dark border-2 rounded-md;
+	}
+
+	.show_password-bubble {
+		@apply after:content-[''] after:absolute after:size-full after:right-0 after:top-0 after:bg-transparent after:-z-10 after:scale-0 after:rounded-full active:after:scale-150 active:after:bg-gray-200;
+	}
+
+	.show_password-bubble::after {
+		transition:
+			0.075s 0s background-color ease-in,
+			0.075s 0s transform ease-in;
+	}
 }
